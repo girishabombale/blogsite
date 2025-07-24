@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Girisha Ramhari Bombale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for refined styling and animations */
+        body {
+            font-family: 'Merriweather', Times New Roman;
+            background-color: #fdfdfd; /* A very light, almost white background */
+            color: #34495e; /* Darker, sophisticated blue-gray for body text */
+            line-height: 1.7; /* Slightly increased line height for readability */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        nav {
+            background-color: #2c3e50; /* Deep blue-gray for navigation */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+        }
+        nav a {
+            color: #ecf0f1; /* Light gray for nav links */
+            padding: 1rem 1.5rem;
+            display: block;
+            transition: background-color 0.4s ease, color 0.4s ease, transform 0.2s ease; /* Added transform transition */
+            border-radius: 0.5rem;
+            position: relative; /* Needed for underline effect */
+            overflow: hidden; /* Hide overflow for underline animation */
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #3498db; /* Vibrant blue for underline */
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-out;
+        }
+        nav a:hover {
+            background-color: #34495e; /* Slightly darker nav background on hover */
+            color: #3498db; /* Vibrant blue for hover effect */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+        nav a:hover::after,
+        nav a.active::after {
+            transform: translateX(0%); /* Animate underline on hover and active */
+        }
+
+        /* Styles for sub-navigation */
+        .sub-nav {
+            background-color: #ecf0f1; /* Lighter background for sub-nav */
+            padding: 0.75rem 0;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .sub-nav a {
+            color: #34495e; /* Darker text for sub-nav links */
+            padding: 0.75rem 1.25rem;
+            display: inline-block; /* Display inline for horizontal layout */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 0.4rem;
+            font-weight: 500;
+        }
+        .sub-nav a:hover {
+            background-color: #dbe4eb; /* Even lighter background on hover */
+            color: #2980b9; /* Stronger blue on hover */
+        }
+        .sub-nav a.active {
+            background-color: #3498db; /* Vibrant blue for active sub-tab */
+            color: white;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2.5rem; /* Increased padding */
+            background-color: #ffffff;
+            border-radius: 1rem; /* More rounded corners */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+            animation: fadeIn 0.9s ease-in-out; /* Slightly slower fade-in */
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .sub-tab-content {
+            display: none;
+            padding-top: 1.5rem; /* Padding for content below sub-tabs */
+        }
+        .sub-tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); } /* More pronounced initial translateY */
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1, h2, h3 {
+            color: #2980b9; /* Strong, clear blue for headings */
+            font-weight: 700;
+            margin-bottom: 1rem; /* Consistent spacing below headings */
+        }
+        .section-heading {
+            border-bottom: 3px solid #bdc3c7; /* Thicker, slightly lighter gray border */
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase; /* Uppercase for section headings */
+            letter-spacing: 0.05em; /* Slight letter spacing */
+        }
+        .card {
+            background-color: #eaf2f8; /* Very light blue for cards */
+            border-radius: 1rem; /* More rounded corners for cards */
+            padding: 2rem; /* Increased padding */
+            margin-bottom: 1.5rem; /* Increased margin */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08); /* Softer initial shadow */
+            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Slower, smoother transition */
+        }
+        .card:hover {
+            transform: translateY(-8px); /* More pronounced lift */
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.18); /* Deeper shadow on hover */
+        }
+        .btn-primary {
+            background-color: #3498db; /* Vibrant blue for primary buttons */
+            color: white;
+            padding: 0.85rem 1.8rem; /* Larger padding */
+            border-radius: 0.6rem; /* Slightly more rounded */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9; /* Darker vibrant blue on hover */
+            transform: translateY(-2px); /* Slight lift */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .footer {
+            background-color: #2c3e50; /* Matching nav background */
+            color: #ecf0f1;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-img {
+            width: 200px; /* Slightly larger image */
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #3498db; /* Vibrant blue border */
+            box-shadow: 0 0 0 10px rgba(52, 152, 219, 0.3); /* Outer glow effect */
+            animation: pulse 2.5s infinite alternate ease-in-out; /* Slower, smoother pulse */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 10px rgba(52, 152, 219, 0.3); }
+            100% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(52, 152, 219, 0.6); } /* More pronounced pulse effect */
+        }
+
+        /* Removed Header Background Image Styles */
+        /* The header will now rely on its Tailwind gradient classes */
+    </style>
+</head>
+<body class="bg-grey-100 text-gray-800">
+
+    <nav class="py-4 shadow-lg">
+        <div class="container flex justify-center space-x-4 md:space-x-8">
+            <a href="#about" class="tab-link active" data-tab="about">About</a>
+			<a href="#research" class="tab-link active" data-tab="research">Research</a>
+            <a href="#experience" class="tab-link" data-tab="experience">Experience</a>
+            <a href="#education" class="tab-link" data-tab="education">Education</a>
+            <a href="#skills" class="tab-link" data-tab="skills">Skills</a>
+            <a href="#publications" class="tab-link" data-tab="publications">Publications</a>
+            <a href="#patents" class="tab-link" data-tab="patents">Patents</a>
+            <a href="#academics" class="tab-link" data-tab="academics">Academics</a>
+            <a href="#contact" class="tab-link" data-tab="contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16 text-center shadow-xl rounded-b-lg">
+        <div class="container header-content">
+            <img src="https://placehold.co/200x200/3498db/ffffff?text=GRB" alt="Dr. Girisha Ramhari Bombale" class="profile-img mx-auto mb-6">
+            <h1 class="text-5xl font-bold mb-2 text-white">Dr. Girisha Ramhari Bombale</h1>
+            <p class="text-xl font-light text-white">HoD & Asst. Professor in Computer Engineering</p>
+            <p class="text-lg mt-4 text-white">"Work Enthusiastic, Challanging Role Handler & Passionate"</p>
+        </div>
+    </header>
+
+    <main class="container py-8">
+        <!-- About Tab -->
+        <section id="about" class="tab-content active">
+            <h2 class="text-3xl section-heading mb-6">About Me</h2>
+            <div class="card">
+                <p class="mb-4">Dr. Girisha Ramhari Bombale is a dedicated and experienced academician and software professional with a strong background in Computer Engineering. She is currently serving as the Head of Department & Assistant Professor at SND College of Engineering & Research Center, Babhulgaon, Yeola (Nashik).</p>
+                <p class="mb-4">With a Ph.D. in Computer Science Engineering awarded in 2024, Dr. Bombale has a profound understanding of various computer science domains including Machine Learning, Data Modelling and Visualization, Cyber Security, and Object-Oriented Programming. Her research interests include Mobile Cellular Telecommunication, Network Security, BREW, and SWARM Robotics.</p>
+                <p>She is a Life Member of the Indian Society of Technical Education (LMISTE), Society for Data Science (S4DS), and International Association of Engineering (IAENG), actively contributing to the academic and research community.</p>
+            </div>
+        </section>
+		<!-- Research -->
+        <section id="research" class="tab-content active">
+            <h2 class="text-3xl section-heading mb-6">Research</h2>
+            <div class="card">
+                <p class="text-xl font-semibold mb-2">Google Scholar</p>
+				<a href="https://scholar.google.com/citations?user=z7x-CAUAAAAJ" target="_blank">View Profile</a>
+				<p class="text-xl font-semibold mb-2">Orcid Profile</p>
+				<a href="https://orcid.org/my-orcid?orcid=0009-0004-3766-131X" target="_blank">View Profile</a>
+				<p class="text-xl font-semibold mb-2">ResearchGate Profile</p>
+				<a href="https://www.researchgate.net" target="_blank">View Profile</a>
+				
+            </div>
+        </section>
+        <!-- Experience Tab -->
+        <section id="experience" class="tab-content">
+            <h2 class="text-3xl section-heading mb-6">Work Experience</h2>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">HoD & Asst. Professor</h3>
+                <p class="text-gray-600 mb-1">Computer Engineering Department, SND College of Engineering & Research Center, Babhulgaon, Yeola (Nashik)</p>
+                <p class="text-gray-500 mb-2">January 2025 – Present</p>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Leading the Computer Engineering Department, overseeing academic and administrative functions.</li>
+                    <li>Mentoring students and guiding research projects.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">UGC Approved Asst. Professor</h3>
+                <p class="text-gray-600 mb-1">Computer Engineering Department, Shree Ramchandra College of Engineering, Wagholi (Pune)</p>
+                <p class="text-gray-500 mb-2">June 2016 – December 2024</p>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Delivered lectures and conducted practical sessions for various computer engineering subjects.</li>
+                    <li>Engaged in research activities and guided student projects.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Asst. Professor</h3>
+                <p class="text-gray-600 mb-1">Computer Engineering Department, SND COE & RC, Yeola (Nashik)</p>
+                <p class="text-gray-500 mb-2">June 2012 – May 2016</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Lecturer</h3>
+                <p class="text-gray-600 mb-1">Computer Technology, Ithape Polytechnic, Velhale (Sangamner)</p>
+                <p class="text-gray-500 mb-2">June 2011 – June 2012</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Software Engineer</h3>
+                <p class="text-gray-600 mb-1">SAN INDOS, Pune</p>
+                <p class="text-gray-500 mb-2">June 2007 – June 2008</p>
+            </div>
+        </section>
+
+        <!-- Education Tab -->
+        <section id="education" class="tab-content">
+            <h2 class="text-3xl section-heading mb-6">Educational Qualification</h2>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Ph.D. (CSE)</h3>
+                <p class="text-gray-600 mb-1">Awarded in 2024</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">M.E. (CSE)</h3>
+                <p class="text-gray-600 mb-1">Year of Passing: 2015, CGPA: 7.35</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">B.E. (I.T.)</h3>
+                <p class="text-gray-600 mb-1">Year of Passing: 2011, Marks: 68.20%</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Diploma (CE)</h3>
+                <p class="text-gray-600 mb-1">Year of Passing: 2008, Marks: 63.04%</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">S.S.C.</h3>
+                <p class="text-gray-600 mb-1">Year of Passing: 2006, Marks: 78.40%</p>
+            </div>
+        </section>
+
+        <!-- Skills Tab -->
+        <section id="skills" class="tab-content">
+            <h2 class="text-3xl section-heading mb-6">Skill Set</h2>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Languages:</h3>
+                <p class="text-gray-700">C, C++, Java, Python</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Operating Systems:</h3>
+                <p class="text-gray-700">Windows 98, Windows XP, Windows 7, 8, 10, 11, Unix/Linux</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Internet Applications:</h3>
+                <p class="text-gray-700">HTML</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Subjects Taught:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Object Oriented Modeling Design</li>
+                    <li>Information Security</li>
+                    <li>Fundamental Programming Language</li>
+                    <li>Computer Organization</li>
+                    <li>Discrete Structure</li>
+                    <li>Computer Graphics</li>
+                    <li>Discrete Mathematics</li>
+                    <li>Software Engineering and Project Management</li>
+                    <li>Applied Algorithm</li>
+                    <li>Machine Learning</li>
+                    <li>Data Modelling and Visualization</li>
+                    <li>Cyber Security</li>
+                    <li>DBMS, FDS, DSA, OOP</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Research Interests:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Mobile Cellular Telecommunication</li>
+                    <li>Network Security</li>
+                    <li>BREW (Binary Runtime Environment For Wireless)</li>
+                    <li>SWARM Robotics</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Publications Tab -->
+        <section id="publications" class="tab-content">
+            <h2 class="text-3xl section-heading mb-6">Publications</h2>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">International Level Paper Presentations:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Emotion Analysis through Speech and Image in ARD-IJEET Volume-3, Issue-2 April 2015.</li>
+                    <li>Enhancing Facial Action Recognition by system using multi Kernel- A Review. in IJETAE at Volume-5 Issue-5 on May, 2015.</li>
+                    <li><a href="http://www.ijetae.com/files/Volume5Issue9/IJETAE_0915_40.pdf" target="_blank" class="text-blue-600 hover:underline">Enhancing Facial Action Recognition Using Multikernel</a>. in IJETAE at Volume-5 Issue-9 on September, 2015.</li>
+                    <li>SCOPUS Indexed Journal on Facial Action Recognition Using Multikernel Learning to Combine Heterogeneous Features in Neuro Quantology, An interdisciplinary Journal of Neuroscience and Quantum Physics, ISSN: 1303- 5150, Vol. 20 Issue 5, May 2022, Page No.5450-5456.</li>
+                    <li>SCOPUS Indexed Journal on Using Multikernel Learning to Combine Heterogeneous Features for Facial Action Recognition in Webology, International Journal, ISSN: 1735- 188X, Vol. 18 Issue 6, 2021, Page No. 9313- 9320.</li>
+                    <li>Research Publication in Scopus Journal An adaptive energy detection scheme using estimation of noise uncertainty for cognitive radio Springer Nature, International Journal of Information Technology, <a href="https://doi.org/10.1007/s41870-025-02551-8" target="_blank" class="text-blue-600 hover:underline">https://doi.org/10.1007/s41870-025-02551-8</a></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Book Publications:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Editor & Reviewer: Futuristic Trends in Artificial Intelligence, Volume 3 Book 12; e - ISBN :978-93-6252-541-3; Selfypage Developers Pvt Ltd., Iterative International Publishers.</li>
+                    <li>Publication of Book: A Text book of Research Methodology by RK Publication; ISBN-978-93-49701-81-6; DOI: <a href="https://doi.org/10.5281/zenodo.15656380" target="_blank" class="text-blue-600 hover:underline">https://doi.org/10.5281/zenodo.15656380</a></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Conference Presentations:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>National Level Paper Presentation on Mobile Cellular Telecommunication at CS Department of Saurashtra University, Rajkot on 1st-2nd Oct.2006.</li>
+                    <li>Paper Presented at Fourth Post Graduate Conference on Enhancing Facial Action Recognition Using Multi Kernel at MET Bhujabal Knowledge City, Institute of Engineering, Nashik on 13th-14th March 2015.</li>
+                    <li>Attended Conference & Presented paper on An Approach For Facial Expressions To Automatically Detect Pain, Title of the conference Impact of Information Technology after Pandemic in the field of Commerce, Management, Science, Medical, Engineering, Education and Humanities (IC-IITP-2023) Date: 30 January 2023.</li>
+                    <li>Attended Conference & Presented paper on Kernel Canonical Correlation Analysis For Multimodal Emotion Recognition Using K-Means Clustering, Title of the conference Innovation in Multidisciplinary Areas in the Field of Commerce, Management, Science, Engineering, Medical, Education, Information Technology, Humanities, Law and Agriculture Date: 21 January 2023.</li>
+                    <li>Attended Conference & Presented paper on An Investigation Of Facial Expression Recognition Using Local Binary Patterns, Title of the conference Recent Research for Sustainable Development in the field of Science, Humanities, Pharmacy, Medical, Technology and Management (IC-RSDSHPMTM-2022) Date: 16-17 December 2022.</li>
+                    <li>Attended Conference & Presented paper on Face Emotion Recognition With Deep Stacking Autoencoders And Updated Hog And Lbp Characteristics, Title of the conference Recent Trend of Commerce, Arts, Science, Education, Management and Humanities in Present Scenario (IC-RTCASEMHPS-2022) Date: 26-27 September 2022.</li>
+                    <li>Attended Conference & Presented paper on Facial Expression Recognition Using Kernel- Based Convolution Expansion Title of Conference: Recent Research on mangment, Scisnce , Pharmacy & Engineering. Date: 05-August 2022.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Patents Tab -->
+        <section id="patents" class="tab-content">
+            <h2 class="text-3xl section-heading mb-6">Patents</h2>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">Emotions Analysis Using Multikernel</h3>
+                <p class="text-gray-600 mb-1">Filed: 17/06/2023, Published: 04/08/2023</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">AI based drone for real-time crowed detection and management</h3>
+                <p class="text-gray-600 mb-1">Filed: 10/03/2025, Application Number: 451013-001</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2">ML-Enhanced Mammogram Analyser</h3>
+                <p class="text-gray-600 mb-1">Filed: 29/03/2025, Application No.453619-001</p>
+            </div>
+        </section>
+
+        <!-- Academics Tab -->
+        <section id="academics" class="tab-content">
+            <h2 class="text-3xl section-heading mb-6">Academics</h2>
+
+            <div class="sub-nav flex justify-center space-x-4 mb-6">
+                <a href="#course-file" class="sub-tab-link active" data-sub-tab="course-file">Course File</a>
+                <a href="#students-corner" class="sub-tab-link" data-sub-tab="students-corner">Students Corner</a>
+            </div>
+
+            <!-- Course File Sub-tab Content -->
+            <div id="course-file" class="sub-tab-content active">
+                <h3 class="text-2xl font-semibold mb-4 text-center">Course Materials</h3>
+                <div class="card">
+                    <p class="mb-4">Here you can find various course-related documents and resources.</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><a href="path/to/your/course_syllabus.pdf" target="_blank" class="text-blue-600 hover:underline flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.414L14.586 5A2 2 0 0115 6.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 10V6h.5a.5.5 0 00.5-.5V4h-.5a.5.5 0 00-.5.5v9h-.5a.5.5 0 00-.5.5v.5h.5a.5.5 0 00.5-.5zM10 9a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zm0 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            Computer Graphics Syllabus (PDF)
+                        </a></li>
+                        <li><a href="path/to/your/oop_notes.docx" target="_blank" class="text-blue-600 hover:underline flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 6.293A1 1 0 015.586 6H4zm4 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zm0 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zm0 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            OOP Lecture Notes (Word Document)
+                        </a></li>
+                        <li><a href="path/to/your/ml_assignments.xlsx" target="_blank" class="text-blue-600 hover:underline flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2H3zm0 2h14v10H3V6zm2 4a1 1 0 00-1 1v2a1 1 0 102 0v-2a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v2a1 1 0 102 0v-2a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v2a1 1 0 102 0v-2a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                            Machine Learning Assignments (Excel Sheet)
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Students Corner Sub-tab Content -->
+            <div id="students-corner" class="sub-tab-content">
+                <h3 class="text-2xl font-semibold mb-4 text-center">Resources for Students</h3>
+                <div class="card">
+                    <p class="mb-4">This section provides useful resources and guidelines for students.</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><a href="path/to/your/project_guidelines.pdf" target="_blank" class="text-blue-600 hover:underline flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.414L14.586 5A2 2 0 0115 6.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 10V6h.5a.5.5 0 00.5-.5V4h-.5a.5.5 0 00-.5.5v9h-.5a.5.5 0 00-.5.5v.5h.5a.5.5 0 00.5-.5zM10 9a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zm0 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            Project Submission Guidelines (PDF)
+                        </a></li>
+                        <li><a href="path/to/your/seminar_template.pptx" target="_blank" class="text-blue-600 hover:underline flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.414L14.586 5A2 2 0 0115 6.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 10V6h.5a.5.5 0 00.5-.5V4h-.5a.5.5 0 00-.5.5v9h-.5a.5.5 0 00-.5.5v.5h.5a.5.5 0 00.5-.5zM10 9a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zm0 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            Seminar Presentation Template (PowerPoint)
+                        </a></li>
+                        <li><a href="path/to/your/faq_document.docx" target="_blank" class="text-blue-600 hover:underline flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 6.293A1 1 0 015.586 6H4zm4 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zm0 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zm0 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            Frequently Asked Questions (Word Document)
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            </section>
+
+        <!-- Contact Tab -->
+        <section id="contact" class="tab-content">
+            <h2 class="text-3xl section-heading mb-6">Contact Details</h2>
+            <div class="card">
+                <p class="mb-2"><strong class="font-semibold">Name:</strong> Dr. Girisha Ramhari Bombale</p>
+                <p class="mb-2"><strong class="font-semibold">Mobile No.:</strong> +91 9960533184</p>
+                <p class="mb-2"><strong class="font-semibold">Mail ID:</strong> <a href="mailto:girishabombale@gmail.com" class="text-blue-600 hover:underline">girishabombale@gmail.com</a></p>
+                <p class="mb-2"><strong class="font-semibold">Current Address:</strong> Loni Bk, Tal: Rahta, Dist: Ahilyanagar-413736</p>
+                <p class="mb-2"><strong class="font-semibold">Permanent Address:</strong> C/o: Ajeet Bhagwat Bhane, Ganesh Nagar, Wagholi Pune-412207. State: Maharashtra (India)</p>
+                <p class="mb-2"><strong class="font-semibold">Marital Status:</strong> Married</p>
+                <p class="mb-2"><strong class="font-semibold">Date of Declaration:</strong> 20/07/2025</p>
+                <p class="mb-2"><strong class="font-semibold">Place:</strong> Loni Bk</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Dr. Girisha Ramhari Bombale. All rights reserved.</p>
+        <p>Designed with <span class="text-red-500">Own</span> using modern web technologies.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const subTabLinks = document.querySelectorAll('.sub-tab-link');
+            const subTabContents = document.querySelectorAll('.sub-tab-content');
+
+            // Function to show a specific main tab
+            const showMainTab = (tabId) => {
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                tabLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                document.getElementById(tabId).classList.add('active');
+                document.querySelector(`.tab-link[data-tab="${tabId}"]`).classList.add('active');
+
+                // If the "Academics" tab is activated, show its default sub-tab
+                if (tabId === 'academics') {
+                    showSubTab('course-file'); // Default to Course File
+                }
+            };
+
+            // Function to show a specific sub-tab
+            const showSubTab = (subTabId) => {
+                subTabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                subTabLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                document.getElementById(subTabId).classList.add('active');
+                document.querySelector(`.sub-tab-link[data-sub-tab="${subTabId}"]`).classList.add('active');
+            };
+
+
+            // Event listener for main tab clicks
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = e.target.dataset.tab;
+                    showMainTab(tabId);
+                    window.location.hash = tabId; // Update URL hash
+                });
+            });
+
+            // Event listener for sub-tab clicks
+            subTabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const subTabId = e.target.dataset.subTab;
+                    showSubTab(subTabId);
+                    // Optionally update URL hash to include sub-tab: #academics/course-file
+                    // window.location.hash = `academics/${subTabId}`;
+                });
+            });
+
+
+            // Handle initial tab based on URL hash or default to 'about'
+            const initialHash = window.location.hash ? window.location.hash.substring(1) : 'about';
+            const hashParts = initialHash.split('/');
+            const mainTabFromHash = hashParts[0];
+            const subTabFromHash = hashParts[1];
+
+            showMainTab(mainTabFromHash);
+            if (mainTabFromHash === 'academics' && subTabFromHash) {
+                showSubTab(subTabFromHash);
+            } else if (mainTabFromHash === 'academics') {
+                showSubTab('course-file'); // Default sub-tab for Academics
+            }
+
+
+            // Function to handle file uploads (conceptual, no actual server-side logic here)
+            // For actual file uploads, you would need a backend server to handle the file storage.
+            // This example shows how you might structure the HTML for an wupload form.
+            function handleFileUpload() {
+                // This function is illustrative. In a real application, you would:
+                // 1. Get the selected file from the input element.
+                // 2. Use FormData to package the file.
+                // 3. Send it to a server-side endpoint using fetch or XMLHttpRequest.
+                // 4. The server would then save the file to a designated directory.
+                console.log("File upload initiated (client-side only).");
+                // Using a custom message box instead of alert()
+                const messageBox = document.createElement('div');
+                messageBox.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: white;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                    z-index: 1000;
+                    text-align: center;
+                    font-family: 'Lato', sans-serif;
+                    color: #34495e;
+                `;
+                messageBox.innerHTML = `
+                    <p class="mb-4">File upload functionality requires a backend server to store files. This is a client-side demonstration.</p>
+                    <button id="closeMessageBox" class="btn-primary">OK</button>
+                `;
+                document.body.appendChild(messageBox);
+
+                document.getElementById('closeMessageBox').addEventListener('click', () => {
+                    document.body.removeChild(messageBox);
+                });
+
+                // Example of how to access the file input:
+                // const fileInput = document.getElementById('resume-upload');
+                // const file = fileInput.files[0];
+                // if (file) {
+                //     console.log('Selected file:', file.name);
+                //     // Here you would typically send the file to a server
+                //     // Example:
+                //     // const formData = new FormData();
+                //     // formData.append('resume', file);
+                //     // fetch('/upload-resume', {
+                //     //     method: 'POST',
+                //     //     body: formData
+                //     // }).then(response => response.json())
+                //     //   .then(data => console.log(data))
+                //     //   .catch(error => console.error('Error uploading file:', error));
+                // }
+            }
+        });
+    </script>
+</body>
+</html>
